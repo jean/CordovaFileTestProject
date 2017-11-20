@@ -58,8 +58,10 @@
             <div class="redButton" ng-click="handleButtonClick('bad')" ng-show="redButtonEnable">{{redButtonMessage}}</div>
 
             <br/>
-            <div>{{finalOutput}}</div>
+            <div class="outputText"><p style="margin: 5px">{{finalOutput}}</p></div>
 
+            <br/>
+            <div class="resetButton" ng-click="resetTheProcess()" ng-show="resetButtonShow">RESET</div>
 
         </div>
 

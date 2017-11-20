@@ -9,10 +9,17 @@
       $scope.appMessage = "deviceready";
       $scope.greenButtonEnable = true;
       $scope.redButtonEnable = true;
+      $scope.resetButtonShow = false;
       $scope.greenButtonMessage = 'Working Example';
       $scope.redButtonMessage = 'Reproduce Bug';
       $scope.processStep = 1;
-      $scope.finalOutput = '';
+      $scope.finalOutput = null;
+
+      var initialHref = window.location.href;
+
+      function restartApplication() {
+        window.location = initialHref;
+      }
 
       function deviceReady() {
         receivedEvent('deviceready')
@@ -28,7 +35,6 @@
 
       $scope.handleButtonClick = function(type){
         var filePath;
-        alert(type +" :: "+ $scope.processStep);
         if($scope.processStep === 1){
           if(type == 'bad'){
             filePath = 'BadMember.json';
@@ -54,14 +60,56 @@
             });//end of file read
         }else {
 
-          $cordovaFile.readFile(cordova.file.dataDirectory + 'AllMember.json').then(function(result){
-            var data = JSON.parse(content);
-            $scope.finalOutput = data;
-            $scope.appMessage = "Successfull read from the created file.";
-          }).then(function(error){
-            $scope.finalOutput = error;
-            $scope.appMessage = "Can't read the file.";
-          })
+          // $http.get(cordova.file.dataDirectory + 'AllMember.json')
+          //   .success(function(data, status, headers, config) {
+          //     $scope.finalOutput = data;
+          //     $scope.appMessage = "Successfull read from the created file.";
+          //     $scope.resetButtonShow = true;
+          //     $scope.greenButtonEnable = false;
+          //     $scope.redButtonEnable = false;
+          //   })
+          //   .error(function(error){
+          //     console.log(error);
+          //     $scope.finalOutput = error;
+          //     $scope.appMessage = "Can't read the file.";
+          //     $scope.resetButtonShow = true;
+          //     $scope.greenButtonEnable = false;
+          //     $scope.redButtonEnable = false;
+          //   });//end of file read
+          window.resolveLocalFileSystemURL(cordova.file.dataDirectory + 'AllMember.json',
+              function(fileEntry){
+                fileEntry.file(function(file) {
+                  var reader = new FileReader();
+                  reader.onloadend = function(e) {
+                    try{
+                      console.log(this.result);
+                      var data = JSON.parse(this.result);
+                      $scope.finalOutput = data[0].description;
+                      $scope.appMessage = "Successfull read from the created file.";
+                      $scope.resetButtonShow = true;
+                      $scope.greenButtonEnable = false;
+                      $scope.redButtonEnable = false;
+                    }
+                    catch(error) {
+
+                      $scope.finalOutput = error;
+                      $scope.appMessage = "Can't read the file.";
+                      $scope.resetButtonShow = true;
+                      $scope.greenButtonEnable = false;
+                      $scope.redButtonEnable = false;
+                    }
+                  }
+                  reader.readAsText(file);
+                });
+              },
+              function(e){
+                $scope.finalOutput = e;
+                $scope.appMessage = "File not found";
+                $scope.resetButtonShow = true;
+                $scope.greenButtonEnable = false;
+                $scope.redButtonEnable = false;
+              }
+            );
         }
 
       }//end of handleButtonClick function
@@ -75,9 +123,22 @@
                   $scope.finalOutput = error;
                   $scope.appMessage = "Oops! Something went wrong while creating and writing a file.";
               });
-          };
+          }
+
+      $scope.resetTheProcess = function() {
+        $scope.appMessage = "deviceready";
+        $scope.greenButtonEnable = true;
+        $scope.redButtonEnable = true;
+        $scope.resetButtonShow = false;
+        $scope.greenButtonMessage = 'Working Example';
+        $scope.redButtonMessage = 'Reproduce Bug';
+        $scope.processStep = 1;
+        $scope.finalOutput = null;
+
+        restartApplication();
+      }
 
 
-    }]);
+    }]);//End of Controller
 
 })();

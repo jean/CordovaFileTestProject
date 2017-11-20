@@ -31,7 +31,6 @@ body {
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
     width:100%;
 }
 
@@ -81,6 +80,7 @@ h1 {
   margin-bottom: 20px;
   text-align: center;
   width: auto;
+  text-transform:uppercase;
 }
 
 .redButton{
@@ -96,15 +96,38 @@ h1 {
   margin-bottom: 20px;
   text-align: center;
   width: auto;
+  text-transform:uppercase;
+}
+
+.resetButton{
+  border-radius:4px;
+  -webkit-border-radius:4px;
+  border-color: #f0f0f0;
+  color:#FFFFFF;
+  background-color: #5555aa;
+  font-size:15px;
+  margin:0px 30px;
+  padding:2px 0px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  width: auto;
+  font-weight: bold;
+  text-transform:uppercase;
 }
 
 .messageText{
   text-align: center;
   color: #55AA55;
   font-weight: bold;
+  text-transform:uppercase;
 }
 
-
+.outputText{
+  background-color: #FFF;
+  margin-left: 2.5%;
+  width: 95%;
+}
 
 .event {
     border-radius:4px;
