@@ -31,7 +31,6 @@ body {
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
     width:100%;
 }
 
@@ -81,6 +80,7 @@ h1 {
   margin-bottom: 20px;
   text-align: center;
   width: auto;
+  text-transform:uppercase;
 }
 
 .redButton{
@@ -96,6 +96,7 @@ h1 {
   margin-bottom: 20px;
   text-align: center;
   width: auto;
+  text-transform:uppercase;
 }
 
 .resetButton{
@@ -112,12 +113,14 @@ h1 {
   text-align: center;
   width: auto;
   font-weight: bold;
+  text-transform:uppercase;
 }
 
 .messageText{
   text-align: center;
   color: #55AA55;
   font-weight: bold;
+  text-transform:uppercase;
 }
 
 
