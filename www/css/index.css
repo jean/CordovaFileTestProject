@@ -123,7 +123,11 @@ h1 {
   text-transform:uppercase;
 }
 
-
+.outputText{
+  background-color: #FFF;
+  margin-left: 2.5%;
+  width: 95%;
+}
 
 .event {
     border-radius:4px;

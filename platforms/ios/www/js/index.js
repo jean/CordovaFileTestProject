@@ -13,7 +13,7 @@
       $scope.greenButtonMessage = 'Working Example';
       $scope.redButtonMessage = 'Reproduce Bug';
       $scope.processStep = 1;
-      $scope.finalOutput = '';
+      $scope.finalOutput = null;
 
       var initialHref = window.location.href;
 
@@ -84,7 +84,7 @@
                     try{
                       console.log(this.result);
                       var data = JSON.parse(this.result);
-                      $scope.finalOutput = data;
+                      $scope.finalOutput = data[0].description;
                       $scope.appMessage = "Successfull read from the created file.";
                       $scope.resetButtonShow = true;
                       $scope.greenButtonEnable = false;
@@ -133,7 +133,7 @@
         $scope.greenButtonMessage = 'Working Example';
         $scope.redButtonMessage = 'Reproduce Bug';
         $scope.processStep = 1;
-        $scope.finalOutput = '';
+        $scope.finalOutput = null;
 
         restartApplication();
       }
